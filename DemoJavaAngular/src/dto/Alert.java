@@ -1,3 +1,4 @@
+//Alert POJO
 package dto;
 
 import java.util.Date;

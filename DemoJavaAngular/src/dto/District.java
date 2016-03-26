@@ -6,11 +6,9 @@ public class District {
 	private String DISTRICT_NAME;
 	private Integer STATE_ID;
 	
-	public District()
-	{
-		
+	public District() {
+		// TODO Auto-generated constructor stub
 	}
-
 	public Integer getDISTRICT_ID() {
 		return DISTRICT_ID;
 	}
@@ -36,5 +34,4 @@ public class District {
 	}
 	
 	
-
 }

@@ -62,22 +62,22 @@ public class AtmService {
 	@Produces("application/json")
 	public String feedBankInfo()
 	{
-	String feeds = null;
+	String bankData = null;
 	try
 	{
-	ArrayList<Bank_Info> feedData = null;
+	ArrayList<Bank_Info> bankList = null;
 	AlertManager projectManager= new AlertManager();
-	feedData = projectManager.GetBankInfo();
+	bankList = projectManager.BankInfoMethod();
 	Gson gson = new Gson();
-	System.out.println(gson.toJson(feedData));
-	feeds = gson.toJson(feedData);
+	System.out.println(gson.toJson(bankList));
+	bankData = gson.toJson(bankList);
 	}
 
 	catch (Exception e)
 	{
 	System.out.println("Exception Error"); //Console 
 	}
-	return feeds;
+	return bankData;
 	}
 	
 	@GET
@@ -85,114 +85,114 @@ public class AtmService {
 	@Produces("application/json")
 	public String feedSensorInfo()
 	{
-	String feeds = null;
+	String sensorService = null;
 	try
 	{
-	ArrayList<Sensor> feedData = null;
+	ArrayList<Sensor> sensorList = null;
 	AlertManager projectManager= new AlertManager();
-	feedData = projectManager.GetSensorInfo();
+	sensorList = projectManager.SensorMethod();
 	Gson gson = new Gson();
-	System.out.println(gson.toJson(feedData));
-	feeds = gson.toJson(feedData);
+	System.out.println(gson.toJson(sensorList));
+	sensorService = gson.toJson(sensorList);
 	}
 
 	catch (Exception e)
 	{
 	System.out.println("Exception Error"); //Console 
 	}
-	return feeds;
+	return sensorService;
 	}
 	
 	@GET
 	@Path("/GetStateInfo")
 	@Produces("application/json")
-	public String feedStateInfo()
+	public String state()
 	{
-	String feeds = null;
+	String stateService = null;
 	try
 	{
-	ArrayList<State> feedData = null;
+	ArrayList<State> statedata = null;
 	AlertManager projectManager= new AlertManager();
-	feedData = projectManager.GetStateInfo();
+	statedata = projectManager.StateMethod();
 	Gson gson = new Gson();
-	System.out.println(gson.toJson(feedData));
-	feeds = gson.toJson(feedData);
+	System.out.println(gson.toJson(statedata));
+	stateService = gson.toJson(statedata);
 	}
 
 	catch (Exception e)
 	{
 	System.out.println("Exception Error"); //Console 
 	}
-	return feeds;
+	return stateService;
 	}
 
 	
 	@GET
 	@Path("/GetDistrict")
 	@Produces("application/json")
-	public String feedDistrict()
+	public String District()
 	{
-	String feeds = null;
+	String districtData = null;
 	try
 	{
-	ArrayList<District> feedData = null;
+	ArrayList<District> districtList = null;
 	AlertManager projectManager= new AlertManager();
-	feedData = projectManager.GetDistrict();
+	districtList = projectManager.DistrictMethod();
 	Gson gson = new Gson();
-	System.out.println(gson.toJson(feedData));
-	feeds = gson.toJson(feedData);
+	System.out.println(gson.toJson(districtList));
+	districtData = gson.toJson(districtList);
 	}
 
 	catch (Exception e)
 	{
 	System.out.println("Exception Error"); //Console 
 	}
-	return feeds;
+	return districtData;
 	}
 
 	@GET
 	@Path("/GetCityInfo")
 	@Produces("application/json")
-	public String feedCityInfo()
+	public String City()
 	{
-	String feeds = null;
+	String cityData = null;
 	try
 	{
-	ArrayList<City> feedData = null;
+	ArrayList<City> cityList = null;
 	AlertManager projectManager= new AlertManager();
-	feedData = projectManager.GetCityInfo();
+	cityList = projectManager.CityMethod();
 	Gson gson = new Gson();
-	System.out.println(gson.toJson(feedData));
-	feeds = gson.toJson(feedData);
+	System.out.println(gson.toJson(cityList));
+	cityData = gson.toJson(cityList);
 	}
 
 	catch (Exception e)
 	{
 	System.out.println("Exception Error"); //Console 
 	}
-	return feeds;
+	return cityData;
 	}
 	@GET
 	@Path("/GetCountry")
 	@Produces("application/json")
 	public String feedCountry()
 	{
-	String feeds = null;
+	String countryData = null;
 	try
 	{
-	ArrayList<Country> feedData = null;
+	ArrayList<Country> countryList = null;
 	AlertManager projectManager= new AlertManager();
-	feedData = projectManager.GetCountry();
+	countryList = projectManager.CountryMethod();
 	Gson gson = new Gson();
-	System.out.println(gson.toJson(feedData));
-	feeds = gson.toJson(feedData);
+	System.out.println(gson.toJson(countryList));
+	countryData = gson.toJson(countryList);
 	}
 
 	catch (Exception e)
 	{
 	System.out.println("Exception Error"); //Console 
 	}
-	return feeds;
+	return countryData;
 	}
 
 	@GET

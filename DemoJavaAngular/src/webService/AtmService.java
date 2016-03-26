@@ -25,6 +25,7 @@ import model.AlertManager;
 import com.google.gson.Gson;
 import dto.Alert;
 import dto.Atm_Info;
+import dto.Country;
 import dto.Users;
 
 @Path("/WebService")
@@ -50,6 +51,29 @@ public class AtmService {
 			System.out.println("Exception Error");
 		}
 		return feeds;
+	}
+	
+	@GET
+	@Path("/GetCountry")
+	@Produces("application/json")
+	public String feedCountry()
+	{
+	String feeds = null;
+	try
+	{
+	ArrayList<Country> feedData = null;
+	AlertManager projectManager= new AlertManager();
+	feedData = projectManager.GetCountry();
+	Gson gson = new Gson();
+	System.out.println(gson.toJson(feedData));
+	feeds = gson.toJson(feedData);
+	}
+
+	catch (Exception e)
+	{
+	System.out.println("Exception Error"); //Console 
+	}
+	return feeds;
 	}
 
 	@GET

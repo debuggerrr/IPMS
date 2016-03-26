@@ -15,6 +15,7 @@ import org.joda.time.format.ISODateTimeFormat;
 import dto.Alert;
 import dto.Atm_Info;
 import dto.Bank_Info;
+import dto.City;
 import dto.Atm_Sensor_Relation;
 import dto.Sensor;
 import dto.Country;
@@ -85,6 +86,27 @@ public class AlertDao {
 				feedObject.setDISTRICT_NAME(rs.getString("DISTRICT_NAME"));
 				feedObject.setSTATE_ID(rs.getInt("STATE_ID"));
 
+				System.out.println("Execute");
+				feedData.add(feedObject);
+			}
+			return feedData;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	public ArrayList<City> GetCityInfo(Connection connection)
+			throws Exception {
+		ArrayList<City> feedData = new ArrayList<City>();
+		try {
+			PreparedStatement ps = connection
+					.prepareStatement("select * from city");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				City feedObject = new City();
+
+				feedObject.setCITY_ID(rs.getInt("city_id"));
+				feedObject.setCITY_NAME(rs.getString("city_name"));
+				feedObject.setDISTRICT_ID(rs.getInt("district_id"));
 				System.out.println("Execute");
 				feedData.add(feedObject);
 			}

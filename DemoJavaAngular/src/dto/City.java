@@ -6,11 +6,9 @@ public class City {
 	private String CITY_NAME;
 	private Integer DISTRICT_ID;
 	
-	public City()
-	{
-		
+	public City() {
+		// TODO Auto-generated constructor stub
 	}
-
 	public Integer getCITY_ID() {
 		return CITY_ID;
 	}

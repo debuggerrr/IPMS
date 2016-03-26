@@ -18,6 +18,7 @@ import dto.Bank_Info;
 import dto.City;
 import dto.Atm_Sensor_Relation;
 import dto.Sensor;
+import dto.State;
 import dto.Country;
 import dto.District;
 
@@ -71,6 +72,80 @@ public class AlertDao {
 			throw e;
 		}
 	}
+	public ArrayList<Bank_Info> GetBankInfo(Connection connection)
+			throws Exception {
+		ArrayList<Bank_Info> feedData = new ArrayList<Bank_Info>();
+		try {
+			PreparedStatement ps = connection
+					.prepareStatement("select * from bank_info");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Bank_Info feedObject = new Bank_Info();
+
+				feedObject.setBANK_ID(rs.getInt("bank_id"));
+				feedObject.setBANK_NAME(rs.getString("bank_name"));
+				feedObject.setSTATUS(rs.getString("status"));
+				feedObject.setCREATED(rs.getDate("created"));
+				feedObject.setMODIFIED(rs.getDate("modified"));
+				System.out.println("Execute");
+				feedData.add(feedObject);
+			}
+			return feedData;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public ArrayList<Sensor> GetSensorInfo(Connection connection)
+			throws Exception {
+		ArrayList<Sensor> feedData = new ArrayList<Sensor>();
+		try {
+			PreparedStatement ps = connection
+					.prepareStatement("select * from sensor");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Sensor feedObject = new Sensor();
+
+				feedObject.setSENSOR_ID(rs.getInt("sensor_id"));
+				feedObject.setSENSOR_NAME(rs.getString("sensor_name"));
+				feedObject.setMIN_VALUE(rs.getString("min_value"));
+				feedObject.setMAX_VALUE(rs.getString("max_value"));
+				feedObject.setTHRESHOLD_VALUE(rs.getString("threshold_value"));
+				feedObject.setSTATUS(rs.getString("status"));
+				feedObject.setCREATED(rs.getDate("created"));
+				feedObject.setMODIFIED(rs.getDate("modified"));
+
+				System.out.println("Execute");
+				feedData.add(feedObject);
+			}
+			return feedData;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	public ArrayList<State> GetStateInfo(Connection connection)
+			throws Exception {
+		ArrayList<State> feedData = new ArrayList<State>();
+		try {
+			PreparedStatement ps = connection
+					.prepareStatement("select * from state");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				State feedObject = new State();
+
+				feedObject.setSTATE_ID(rs.getInt("state_id"));
+				feedObject.setSTATE_NAME(rs.getString("state_name"));
+				feedObject.setCOUNTRY_ID(rs.getInt("country_id"));
+				System.out.println("Execute");
+				feedData.add(feedObject);
+			}
+			return feedData;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
 	
 	public ArrayList<District> GetDistrict(Connection connection)
 			throws Exception {

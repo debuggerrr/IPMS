@@ -12,11 +12,9 @@ public class Bank_Info {
 	private Date CREATED;
 	private Date MODIFIED;
 	
-	public Bank_Info()
-	{
-		
+	public Bank_Info() {
+		// TODO Auto-generated constructor stub
 	}
-
 	public Integer getBANK_ID() {
 		return BANK_ID;
 	}

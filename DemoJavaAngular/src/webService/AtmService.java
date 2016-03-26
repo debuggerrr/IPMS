@@ -25,9 +25,12 @@ import model.AlertManager;
 import com.google.gson.Gson;
 import dto.Alert;
 import dto.Atm_Info;
+import dto.Bank_Info;
 import dto.City;
 import dto.Country;
 import dto.District;
+import dto.Sensor;
+import dto.State;
 import dto.Users;
 
 @Path("/WebService")
@@ -54,7 +57,76 @@ public class AtmService {
 		}
 		return feeds;
 	}
+	@GET
+	@Path("/GetBankInfo")
+	@Produces("application/json")
+	public String feedBankInfo()
+	{
+	String feeds = null;
+	try
+	{
+	ArrayList<Bank_Info> feedData = null;
+	AlertManager projectManager= new AlertManager();
+	feedData = projectManager.GetBankInfo();
+	Gson gson = new Gson();
+	System.out.println(gson.toJson(feedData));
+	feeds = gson.toJson(feedData);
+	}
 
+	catch (Exception e)
+	{
+	System.out.println("Exception Error"); //Console 
+	}
+	return feeds;
+	}
+	
+	@GET
+	@Path("/GetSensorInfo")
+	@Produces("application/json")
+	public String feedSensorInfo()
+	{
+	String feeds = null;
+	try
+	{
+	ArrayList<Sensor> feedData = null;
+	AlertManager projectManager= new AlertManager();
+	feedData = projectManager.GetSensorInfo();
+	Gson gson = new Gson();
+	System.out.println(gson.toJson(feedData));
+	feeds = gson.toJson(feedData);
+	}
+
+	catch (Exception e)
+	{
+	System.out.println("Exception Error"); //Console 
+	}
+	return feeds;
+	}
+	
+	@GET
+	@Path("/GetStateInfo")
+	@Produces("application/json")
+	public String feedStateInfo()
+	{
+	String feeds = null;
+	try
+	{
+	ArrayList<State> feedData = null;
+	AlertManager projectManager= new AlertManager();
+	feedData = projectManager.GetStateInfo();
+	Gson gson = new Gson();
+	System.out.println(gson.toJson(feedData));
+	feeds = gson.toJson(feedData);
+	}
+
+	catch (Exception e)
+	{
+	System.out.println("Exception Error"); //Console 
+	}
+	return feeds;
+	}
+
+	
 	@GET
 	@Path("/GetDistrict")
 	@Produces("application/json")

@@ -1,14 +1,13 @@
 package dto;
 
 public class State {
-	
+
 	private Integer STATE_ID;
 	private String STATE_NAME;
 	private Integer COUNTRY_ID;
-	
-	public State()
-	{
-		
+
+	public State() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getSTATE_ID() {
@@ -34,9 +33,5 @@ public class State {
 	public void setCOUNTRY_ID(Integer cOUNTRY_ID) {
 		COUNTRY_ID = cOUNTRY_ID;
 	}
-	
-	
-	
-	
 
 }

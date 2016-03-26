@@ -13,11 +13,9 @@ public class Sensor {
 	private Date CREATED;
 	private Date MODIFIED;
 	
-	public Sensor()
-	{
-		
+	public Sensor() {
+		// TODO Auto-generated constructor stub
 	}
-
 	public Integer getSENSOR_ID() {
 		return SENSOR_ID;
 	}

@@ -31,89 +31,89 @@ public class AlertManager {
 	}
 
 	
-	public ArrayList<Country> GetCountry() throws Exception {
+	public ArrayList<Country> CountryMethod() throws Exception {
 		// TODO Auto-generated method stub
-		ArrayList<Country> feeds = null;
+		ArrayList<Country> countryList = null;
 		try {
 		Database database= new Database();
 		Connection connection = database.Get_Connection();
 		AlertDao project= new AlertDao();
-		feeds=project.GetCountry(connection);
+		countryList=project.GetCountry(connection);
 		}
 		catch (Exception e) {
 		throw e;
 		}
-		return feeds;
+		return countryList;
 		
 	}
-	public ArrayList<District> GetDistrict()throws Exception {
-		ArrayList<District> feeds = null;
+	public ArrayList<District> DistrictMethod()throws Exception {
+		ArrayList<District> districtList = null;
 		try {
 		Database database= new Database();
 		Connection connection = database.Get_Connection();
 		AlertDao project= new AlertDao();
-		feeds=project.GetDistrict(connection);
+		districtList=project.GetDistrict(connection);
 		}
 		catch (Exception e) {
 		throw e;
 		}
-		return feeds;
+		return districtList;
 		}
 	
-	public ArrayList<City> GetCityInfo()throws Exception {
-		ArrayList<City> feeds = null;
+	public ArrayList<City> CityMethod()throws Exception {
+		ArrayList<City> cityList = null;
 		try {
 		Database database= new Database();
 		Connection connection = database.Get_Connection();
 		AlertDao project= new AlertDao();
-		feeds=project.GetCityInfo(connection);
+		cityList=project.GetCityInfo(connection);
 		}
 		catch (Exception e) {
 		throw e;
 		}
-		return feeds;
+		return cityList;
 		}
 	
-	public ArrayList<Bank_Info> GetBankInfo()throws Exception {
-		ArrayList<Bank_Info> feeds = null;
+	public ArrayList<Bank_Info> BankInfoMethod()throws Exception {
+		ArrayList<Bank_Info> bankList = null;
 		try {
 		Database database= new Database();
 		Connection connection = database.Get_Connection();
 		AlertDao project= new AlertDao();
-		feeds=project.GetBankInfo(connection);
+		bankList=project.GetBankInfo(connection);
 		}
 		catch (Exception e) {
 		throw e;
 		}
-		return feeds;
+		return bankList;
 		}
 
-	public ArrayList<Sensor> GetSensorInfo()throws Exception {
-		ArrayList<Sensor> feeds = null;
+	public ArrayList<Sensor> SensorMethod()throws Exception {
+		ArrayList<Sensor> sensorManagerData = null;
 		try {
 		Database database= new Database();
 		Connection connection = database.Get_Connection();
 		AlertDao project= new AlertDao();
-		feeds=project.GetSensorInfo(connection);
+		sensorManagerData=project.GetSensorInfo(connection);
 		}
 		catch (Exception e) {
 		throw e;
 		}
-		return feeds;
+		return sensorManagerData;
 		}
 
-	public ArrayList<State> GetStateInfo()throws Exception {
-		ArrayList<State> feeds = null;
+	public ArrayList<State> StateMethod()throws Exception {
+		ArrayList<State> stateManagerData = null;
 		try {
 		Database database= new Database();
 		Connection connection = database.Get_Connection();
 		AlertDao project= new AlertDao();
-		feeds=project.GetStateInfo(connection);
+		stateManagerData=project.GetStateInfo(connection);
 		}
 		catch (Exception e) {
 		throw e;
 		}
-		return feeds;
+		return stateManagerData;
 		}
 
 }

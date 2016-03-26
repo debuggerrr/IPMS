@@ -53,44 +53,43 @@ public class AlertDao {
 	}
 	public ArrayList<Country> GetCountry(Connection connection)
 			throws Exception {
-		ArrayList<Country> feedData = new ArrayList<Country>();
+		ArrayList<Country> countryList = new ArrayList<Country>();
 		try {
 			PreparedStatement ps = connection
-					.prepareStatement("select * from country");
+					.prepareStatement("SELECT COUNTRY_ID,COUNTRY_NAME FROM COUNTRY");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Country feedObject = new Country();
+				Country countryObj = new Country();
 
-				feedObject.setCOUNTRY_ID(rs.getInt("country_id"));
-				feedObject.setCOUNTRY_NAME(rs.getString("country_name"));
+				countryObj.setCOUNTRY_ID(rs.getInt("COUNTRY_ID"));
+				countryObj.setCOUNTRY_NAME(rs.getString("COUNTRY_NAME"));
 
 				System.out.println("Execute");
-				feedData.add(feedObject);
+			countryList.add(countryObj);
 			}
-			return feedData;
+			return countryList;
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 	public ArrayList<Bank_Info> GetBankInfo(Connection connection)
 			throws Exception {
-		ArrayList<Bank_Info> feedData = new ArrayList<Bank_Info>();
+		ArrayList<Bank_Info> bankList = new ArrayList<Bank_Info>();
 		try {
 			PreparedStatement ps = connection
-					.prepareStatement("select * from bank_info");
+					.prepareStatement("SELECT BANK_ID,BANK_NAME,STATUS,CREATED FROM BANK_INFO");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Bank_Info feedObject = new Bank_Info();
+				Bank_Info bankObj = new Bank_Info();
 
-				feedObject.setBANK_ID(rs.getInt("bank_id"));
-				feedObject.setBANK_NAME(rs.getString("bank_name"));
-				feedObject.setSTATUS(rs.getString("status"));
-				feedObject.setCREATED(rs.getDate("created"));
-				feedObject.setMODIFIED(rs.getDate("modified"));
+				bankObj.setBANK_ID(rs.getInt("BANK_ID"));
+				bankObj.setBANK_NAME(rs.getString("BANK_NAME"));
+				bankObj.setSTATUS(rs.getString("STATUS"));
+				bankObj.setCREATED(rs.getDate("CREATED"));
 				System.out.println("Execute");
-				feedData.add(feedObject);
+				bankList.add(bankObj);
 			}
-			return feedData;
+			return bankList;
 		} catch (Exception e) {
 			throw e;
 		}
@@ -98,49 +97,49 @@ public class AlertDao {
 	
 	public ArrayList<Sensor> GetSensorInfo(Connection connection)
 			throws Exception {
-		ArrayList<Sensor> feedData = new ArrayList<Sensor>();
+		ArrayList<Sensor> sensorList = new ArrayList<Sensor>();
 		try {
 			PreparedStatement ps = connection
-					.prepareStatement("select * from sensor");
+					.prepareStatement("SELECT SENSOR_ID,SENSOR_NAME,MIN_VALUE,MAX_VALUE,THRESHOLD_VALUE,STATUS,CREATED FROM SENSOR");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Sensor feedObject = new Sensor();
+				Sensor sensorObj = new Sensor();
 
-				feedObject.setSENSOR_ID(rs.getInt("sensor_id"));
-				feedObject.setSENSOR_NAME(rs.getString("sensor_name"));
-				feedObject.setMIN_VALUE(rs.getString("min_value"));
-				feedObject.setMAX_VALUE(rs.getString("max_value"));
-				feedObject.setTHRESHOLD_VALUE(rs.getString("threshold_value"));
-				feedObject.setSTATUS(rs.getString("status"));
-				feedObject.setCREATED(rs.getDate("created"));
-				feedObject.setMODIFIED(rs.getDate("modified"));
-
+				sensorObj.setSENSOR_ID(rs.getInt("SENSOR_ID"));
+				sensorObj.setSENSOR_NAME(rs.getString("SENSOR_NAME"));
+				sensorObj.setMIN_VALUE(rs.getString("MIN_VALUE"));
+				sensorObj.setMAX_VALUE(rs.getString("MAX_VALUE"));
+				sensorObj.setTHRESHOLD_VALUE(rs.getString("THRESHOLD_VALUE"));
+				sensorObj.setSTATUS(rs.getString("STATUS"));
+				sensorObj.setCREATED(rs.getDate("CREATED"));
+				
 				System.out.println("Execute");
-				feedData.add(feedObject);
+				sensorList.add(sensorObj);
 			}
-			return feedData;
+			//return sensorList;
 		} catch (Exception e) {
-			throw e;
+			e.printStackTrace();
 		}
+		return sensorList;
 	}
 
 	public ArrayList<State> GetStateInfo(Connection connection)
 			throws Exception {
-		ArrayList<State> feedData = new ArrayList<State>();
+		ArrayList<State> stateList = new ArrayList<State>();
 		try {
 			PreparedStatement ps = connection
-					.prepareStatement("select * from state");
+					.prepareStatement("SELECT STATE_ID,STATE_NAME,COUNTRY_ID FROM STATE");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				State feedObject = new State();
+				State stateObj = new State();
 
-				feedObject.setSTATE_ID(rs.getInt("state_id"));
-				feedObject.setSTATE_NAME(rs.getString("state_name"));
-				feedObject.setCOUNTRY_ID(rs.getInt("country_id"));
+				stateObj.setSTATE_ID(rs.getInt("STATE_ID"));
+				stateObj.setSTATE_NAME(rs.getString("STATE_NAME"));
+				stateObj.setCOUNTRY_ID(rs.getInt("COUNTRY_ID"));
 				System.out.println("Execute");
-				feedData.add(feedObject);
+				stateList.add(stateObj);
 			}
-			return feedData;
+			return stateList;
 		} catch (Exception e) {
 			throw e;
 		}
@@ -149,43 +148,43 @@ public class AlertDao {
 	
 	public ArrayList<District> GetDistrict(Connection connection)
 			throws Exception {
-		ArrayList<District> feedData = new ArrayList<District>();
+		ArrayList<District> districtList = new ArrayList<District>();
 		try {
 			PreparedStatement ps = connection
-					.prepareStatement("select * from district");
+					.prepareStatement("SELECT DISTRICT_ID,DISTRICT_NAME,STATE_ID FROM DISTRICT");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				District feedObject = new District();
+				District districtObj = new District();
 
-				feedObject.setDISTRICT_ID(rs.getInt("DISTRICT_ID"));
-				feedObject.setDISTRICT_NAME(rs.getString("DISTRICT_NAME"));
-				feedObject.setSTATE_ID(rs.getInt("STATE_ID"));
+				districtObj.setDISTRICT_ID(rs.getInt("DISTRICT_ID"));
+				districtObj.setDISTRICT_NAME(rs.getString("DISTRICT_NAME"));
+				districtObj.setSTATE_ID(rs.getInt("STATE_ID"));
 
 				System.out.println("Execute");
-				feedData.add(feedObject);
+				districtList.add(districtObj);
 			}
-			return feedData;
+			return districtList;
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 	public ArrayList<City> GetCityInfo(Connection connection)
 			throws Exception {
-		ArrayList<City> feedData = new ArrayList<City>();
+		ArrayList<City> cityList= new ArrayList<City>();
 		try {
 			PreparedStatement ps = connection
-					.prepareStatement("select * from city");
+					.prepareStatement("SELECT CITY_ID,CITY_NAME,DISTRICT_ID FROM CITY ");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				City feedObject = new City();
+				City cityObj = new City();
 
-				feedObject.setCITY_ID(rs.getInt("city_id"));
-				feedObject.setCITY_NAME(rs.getString("city_name"));
-				feedObject.setDISTRICT_ID(rs.getInt("district_id"));
+				cityObj.setCITY_ID(rs.getInt("city_id"));
+				cityObj.setCITY_NAME(rs.getString("city_name"));
+				cityObj.setDISTRICT_ID(rs.getInt("district_id"));
 				System.out.println("Execute");
-				feedData.add(feedObject);
+				cityList.add(cityObj);
 			}
-			return feedData;
+			return cityList;
 		} catch (Exception e) {
 			throw e;
 		}

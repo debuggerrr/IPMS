@@ -7,6 +7,7 @@ import java.util.List;
 import dao.Database;
 import dao.AlertDao;
 import dto.Alert;
+import dto.City;
 import dto.Country;
 import dto.District;
 
@@ -55,5 +56,20 @@ public class AlertManager {
 		}
 		return feeds;
 		}
+	
+	public ArrayList<City> GetCityInfo()throws Exception {
+		ArrayList<City> feeds = null;
+		try {
+		Database database= new Database();
+		Connection connection = database.Get_Connection();
+		AlertDao project= new AlertDao();
+		feeds=project.GetCityInfo(connection);
+		}
+		catch (Exception e) {
+		throw e;
+		}
+		return feeds;
+		}
+	
 	
 }

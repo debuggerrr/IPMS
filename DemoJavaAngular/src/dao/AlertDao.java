@@ -51,12 +51,11 @@ public class AlertDao {
 			throw e;
 		}
 	}
-	public ArrayList<Country> GetCountry(Connection connection)
-			throws Exception {
+
+	public ArrayList<Country> GetCountry(Connection connection) throws Exception {
 		ArrayList<Country> countryList = new ArrayList<Country>();
 		try {
-			PreparedStatement ps = connection
-					.prepareStatement("SELECT COUNTRY_ID,COUNTRY_NAME FROM COUNTRY");
+			PreparedStatement ps = connection.prepareStatement("SELECT COUNTRY_ID,COUNTRY_NAME FROM COUNTRY");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				Country countryObj = new Country();
@@ -65,15 +64,15 @@ public class AlertDao {
 				countryObj.setCOUNTRY_NAME(rs.getString("COUNTRY_NAME"));
 
 				System.out.println("Execute");
-			countryList.add(countryObj);
+				countryList.add(countryObj);
 			}
 			return countryList;
 		} catch (Exception e) {
 			throw e;
 		}
 	}
-	public ArrayList<Bank_Info> GetBankInfo(Connection connection)
-			throws Exception {
+
+	public ArrayList<Bank_Info> GetBankInfo(Connection connection) throws Exception {
 		ArrayList<Bank_Info> bankList = new ArrayList<Bank_Info>();
 		try {
 			PreparedStatement ps = connection
@@ -94,13 +93,12 @@ public class AlertDao {
 			throw e;
 		}
 	}
-	
-	public ArrayList<Sensor> GetSensorInfo(Connection connection)
-			throws Exception {
+
+	public ArrayList<Sensor> GetSensorInfo(Connection connection) throws Exception {
 		ArrayList<Sensor> sensorList = new ArrayList<Sensor>();
 		try {
-			PreparedStatement ps = connection
-					.prepareStatement("SELECT SENSOR_ID,SENSOR_NAME,MIN_VALUE,MAX_VALUE,THRESHOLD_VALUE,STATUS,CREATED FROM SENSOR");
+			PreparedStatement ps = connection.prepareStatement(
+					"SELECT SENSOR_ID,SENSOR_NAME,MIN_VALUE,MAX_VALUE,THRESHOLD_VALUE,STATUS,CREATED FROM SENSOR");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				Sensor sensorObj = new Sensor();
@@ -112,23 +110,21 @@ public class AlertDao {
 				sensorObj.setTHRESHOLD_VALUE(rs.getString("THRESHOLD_VALUE"));
 				sensorObj.setSTATUS(rs.getString("STATUS"));
 				sensorObj.setCREATED(rs.getDate("CREATED"));
-				
+
 				System.out.println("Execute");
 				sensorList.add(sensorObj);
 			}
-			//return sensorList;
+			// return sensorList;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return sensorList;
 	}
 
-	public ArrayList<State> GetStateInfo(Connection connection)
-			throws Exception {
+	public ArrayList<State> GetStateInfo(Connection connection) throws Exception {
 		ArrayList<State> stateList = new ArrayList<State>();
 		try {
-			PreparedStatement ps = connection
-					.prepareStatement("SELECT STATE_ID,STATE_NAME,COUNTRY_ID FROM STATE");
+			PreparedStatement ps = connection.prepareStatement("SELECT STATE_ID,STATE_NAME,COUNTRY_ID FROM STATE");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				State stateObj = new State();
@@ -145,9 +141,7 @@ public class AlertDao {
 		}
 	}
 
-	
-	public ArrayList<District> GetDistrict(Connection connection)
-			throws Exception {
+	public ArrayList<District> GetDistrict(Connection connection) throws Exception {
 		ArrayList<District> districtList = new ArrayList<District>();
 		try {
 			PreparedStatement ps = connection
@@ -168,12 +162,11 @@ public class AlertDao {
 			throw e;
 		}
 	}
-	public ArrayList<City> GetCityInfo(Connection connection)
-			throws Exception {
-		ArrayList<City> cityList= new ArrayList<City>();
+
+	public ArrayList<City> GetCityInfo(Connection connection) throws Exception {
+		ArrayList<City> cityList = new ArrayList<City>();
 		try {
-			PreparedStatement ps = connection
-					.prepareStatement("SELECT CITY_ID,CITY_NAME,DISTRICT_ID FROM CITY ");
+			PreparedStatement ps = connection.prepareStatement("SELECT CITY_ID,CITY_NAME,DISTRICT_ID FROM CITY ");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				City cityObj = new City();
@@ -774,6 +767,114 @@ public class AlertDao {
 
 		return insertStatus;
 
+	}
+
+	public boolean updateCountry(Connection connection, int country_Id, String country_Name) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps;
+		boolean insertStatus = false;
+
+		try {
+
+			ps = connection.prepareStatement("UPDATE COUNTRY SET COUNTRY_NAME= ? WHERE COUNTRY_ID= ?");
+			ps.setString(1, country_Name);
+			ps.setInt(2, country_Id);
+			int records = ps.executeUpdate();
+			if (records > 0) {
+				insertStatus = true;
+			}
+
+			ps.close();
+
+			connection.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return insertStatus;
+
+	}
+
+	public boolean updateState(Connection connection, int state_Id, String state_Name, int country_Id) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps;
+		boolean insertStatus = false;
+
+		try {
+
+			ps = connection.prepareStatement("UPDATE STATE SET COUNTRY_ID= ? , STATE_NAME= ?  WHERE STATE_ID= ?");
+			ps.setInt(1, country_Id);
+			ps.setString(2, state_Name);
+			ps.setInt(3, state_Id);
+			int records = ps.executeUpdate();
+			if (records > 0) {
+				insertStatus = true;
+			}
+
+			ps.close();
+
+			connection.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return insertStatus;
+
+	}
+
+	public boolean updateCity(Connection connection, int city_Id, String city_Name, int district_Id) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps;
+		boolean insertStatus = false;
+
+		try {
+
+			ps = connection.prepareStatement("UPDATE CITY SET CITY_NAME= ?,DISTRICT_ID= ? WHERE CITY_ID= ?");
+			ps.setString(1, city_Name);
+			ps.setInt(2, district_Id);
+			ps.setInt(3, city_Id);
+			int records = ps.executeUpdate();
+			if (records > 0) {
+				insertStatus = true;
+			}
+
+			ps.close();
+
+			connection.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return insertStatus;	
+	}
+
+	public boolean updateDistrict(Connection connection, int district_Id, String district_Name, int state_Id) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps;
+		boolean insertStatus = false;
+
+		try {
+
+			ps = connection.prepareStatement("UPDATE DISTRICT SET DISTRICT_NAME= ?,STATE_ID= ? WHERE DISTRICT_ID= ?");
+			ps.setString(1, district_Name);
+			ps.setInt(2, state_Id);
+			ps.setInt(3, district_Id);
+			int records = ps.executeUpdate();
+			if (records > 0) {
+				insertStatus = true;
+			}
+			ps.close();
+
+			connection.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return insertStatus;	
 	}
 
 }

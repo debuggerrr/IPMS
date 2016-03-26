@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.ArrayList;
 import dao.AlertDao;
 import dao.Database;
-
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -187,7 +186,6 @@ public class AtmService {
 	System.out.println(gson.toJson(countryList));
 	countryData = gson.toJson(countryList);
 	}
-
 	catch (Exception e)
 	{
 	System.out.println("Exception Error"); //Console 
@@ -707,8 +705,128 @@ public class AtmService {
 	}
 	
 	
-	
-	
-	
+	@PUT
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Path("/updateCountry/{country_id}")
+	public Response updateCountry(Country country,@PathParam("country_id") int country_Id)
+	{
+		String country_Name=country.getCOUNTRY_NAME();
+		String result = "Employee Insertion Failed!!!!";
+		try {
 
+			Database database = new Database();
+			Connection connection = database.Get_Connection();
+
+			AlertDao n = new AlertDao();
+			boolean b = n.updateCountry(connection,country_Id,country_Name);
+
+			if (b == true) {
+				result = "Country Updated SuccessFully!!!!";
+
+			} else {
+				result = "Country Update Failed !";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return Response.status(200).entity(result).build();
+	}
+	
+	@PUT
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Path("/updateState/{state_id}")
+	public Response updateCountry(State state,@PathParam("state_id") int state_Id)
+	{
+		String state_Name=state.getSTATE_NAME();
+		int country_Id=state.getCOUNTRY_ID();
+		
+		String result = "State Updation Failed!!!!";
+		try {
+
+			Database database = new Database();
+			Connection connection = database.Get_Connection();
+
+			AlertDao n = new AlertDao();
+			boolean b = n.updateState(connection,state_Id,state_Name,country_Id);
+
+			if (b == true) {
+				result = "State Records Updated SuccessFully!!!!";
+
+			} else {
+				result = "State Records Update Failed !";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return Response.status(200).entity(result).build();
+	}
+	
+	@PUT
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Path("/updateCity/{city_id}")
+	public Response updateCity(City city,@PathParam("city_id") int city_Id)
+	{
+		String city_Name=city.getCITY_NAME();
+		int district_Id=city.getDISTRICT_ID();
+		
+		String result = "City Updation Failed!!!!";
+		try {
+
+			Database database = new Database();
+			Connection connection = database.Get_Connection();
+
+			AlertDao n = new AlertDao();
+			boolean b = n.updateCity(connection,city_Id,city_Name,district_Id);
+
+			if (b == true) {
+				result = "City Records Updated SuccessFully!!!!";
+
+			} else {
+				result = "City Records Update Failed !";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return Response.status(200).entity(result).build();
+	}
+
+	@PUT
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Path("/updateDistrict/{district_id}")
+	public Response updateDistrict(District district,@PathParam("district_id") int district_Id)
+	{
+		String district_Name=district.getDISTRICT_NAME();
+		int state_Id=district.getSTATE_ID();
+		
+		String result = "District Updation Failed!!!!";
+		try {
+
+			Database database = new Database();
+			Connection connection = database.Get_Connection();
+
+			AlertDao n = new AlertDao();
+			boolean b = n.updateDistrict(connection,district_Id,district_Name,state_Id);
+
+			if (b == true) {
+				result = "District Records Updated SuccessFully!!!!";
+
+			} else {
+				result = "District Records Update Failed !";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return Response.status(200).entity(result).build();
+	}
+
+
+	
 }

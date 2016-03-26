@@ -474,4 +474,165 @@ public class AlertDao {
 
 	}
 
+	public boolean insertAtm(Connection connection, String atmId, String atmName, int bankId, String areaName,
+			int cityId, String pincode, double latitude, double longitude, String contactPerson1, String contactPerson2,
+			String contactPerson3, String contactEmail1, String contactEmail2, String contactEmail3, String contactNo1,
+			String contactNo2, String contactNo3, String contactDetails1, String contactDetails2,
+			String contactDetails3, String brandName, String installationDate, String ipAddress, String online,
+			String status) {
+
+		PreparedStatement ps;
+		boolean insertStatus = false;
+		LocalDate localDate = new LocalDate();
+		String created = localDate.toString();
+		System.out.println(created);
+
+		// Code to insert in modified column with proper format of mysql
+		// datetime
+		DateTime dateTime = new DateTime();
+
+		String modified = new String(dateTime.toString());
+
+		System.out.println(modified);
+
+		String customFormat = "yyyy-MM-dd HH:mm:ss";
+
+		DateTimeFormatter dtf = ISODateTimeFormat.dateTime();
+		LocalDateTime parsedDate = dtf.parseLocalDateTime(modified);
+
+		String dateWithCustomFormat = parsedDate.toString(DateTimeFormat.forPattern(customFormat));
+		System.out.println(dateWithCustomFormat);
+		// ends here
+
+		try {
+			ps = connection.prepareStatement("SELECT ATM_ID FROM ATM_INFO WHERE ATM_ID = ? AND ATM_NAME = ?");
+
+			ps.setString(1, atmId);
+			ps.setString(2, atmName);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (!rs.next()) {
+
+				ps = connection.prepareStatement(
+						"INSERT INTO ATM_INFO (ATM_ID , ATM_NAME , BANK_ID , AREA_NAME , CITY_ID , PINCODE , LATITUDE , LONGITUDE , CONTACT_PERSON1 , CONTACT_PERSON2 , CONTACT_PERSON3 , CONTACT_EMAIL1 , CONTACT_EMAIL2 , CONTACT_EMAIL3 , CONTACT_NO1 , CONTACT_NO2 , CONTACT_NO3 , CONTACT_DETAILS1 , CONTACT_DETAILS2 , CONTACT_DETAILS3 , BRAND_NAME , INSTALLATION_DATE , IP_ADDRESS , ONLINE , STATUS , CREATED , MODIFIED) VALUES (? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ?) ");
+
+				ps.setString(1, atmId);
+				ps.setString(2, atmName);
+				ps.setInt(3, bankId);
+				ps.setString(4, areaName);
+				ps.setInt(5, cityId);
+				ps.setString(6, pincode);
+				ps.setDouble(7, latitude);
+				ps.setDouble(8, longitude);
+				ps.setString(9, contactPerson1);
+				ps.setString(10, contactPerson2);
+				ps.setString(11, contactPerson3);
+				ps.setString(12, contactEmail1);
+				ps.setString(13, contactEmail2);
+				ps.setString(14, contactEmail3);
+				ps.setString(15, contactNo1);
+				ps.setString(16, contactNo2);
+				ps.setString(17, contactNo3);
+				ps.setString(18, contactDetails1);
+				ps.setString(19, contactDetails2);
+				ps.setString(20, contactDetails3);
+				ps.setString(21, brandName);
+				ps.setString(22, installationDate);
+				ps.setString(23, ipAddress);
+				ps.setString(24, online);
+				ps.setString(25, status);
+				ps.setString(26, created);
+				ps.setString(27, dateWithCustomFormat);
+
+				int records = ps.executeUpdate();
+
+				if (records > 0) {
+					insertStatus = true;
+				}
+
+			}
+
+			ps.close();
+
+			connection.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return insertStatus;
+
+	}
+
+	public boolean addUser(Connection connection, String firstName, String lastName, String email, String password,
+			String phoneNo, int roleId, String token, String userStatus) {
+
+		PreparedStatement ps;
+		boolean insertStatus = false;
+		LocalDate localDate = new LocalDate();
+		String created = localDate.toString();
+		System.out.println(created);
+
+		// Code to insert in modified column with proper format of mysql
+		// datetime
+		DateTime dateTime = new DateTime();
+
+		String modified = new String(dateTime.toString());
+
+		System.out.println(modified);
+
+		String customFormat = "yyyy-MM-dd HH:mm:ss";
+
+		DateTimeFormatter dtf = ISODateTimeFormat.dateTime();
+		LocalDateTime parsedDate = dtf.parseLocalDateTime(modified);
+
+		String dateWithCustomFormat = parsedDate.toString(DateTimeFormat.forPattern(customFormat));
+		System.out.println(dateWithCustomFormat);
+		// ends here
+
+		try {
+			ps = connection.prepareStatement("SELECT USER_ID FROM USERS WHERE EMAIL = ?");
+
+			ps.setString(1, email);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (!rs.next()) {
+
+				ps = connection.prepareStatement(
+						"INSERT INTO USERS (FIRST_NAME , LAST_NAME , EMAIL , PASSWORD , PHONE_NUMBER , ROLE_ID , LAST_LOGIN , TOKEN , USER_STATUS , CREATED , MODIFIED) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+				ps.setString(1, firstName);
+				ps.setString(2, lastName);
+				ps.setString(3, email);
+				ps.setString(4, password);
+				ps.setString(5, phoneNo);
+				ps.setInt(6, roleId);
+				ps.setString(7, created);
+				ps.setString(8, token);
+				ps.setString(9, userStatus);
+				ps.setString(10, created);
+				ps.setString(11, dateWithCustomFormat);
+
+				int records = ps.executeUpdate();
+
+				if (records > 0) {
+					insertStatus = true;
+				}
+
+			}
+
+			ps.close();
+
+			connection.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return insertStatus;
+
+	}
+
 }

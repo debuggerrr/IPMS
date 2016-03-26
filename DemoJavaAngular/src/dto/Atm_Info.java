@@ -2,6 +2,12 @@ package dto;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+import org.joda.time.*;
+
 public class Atm_Info {
 	
 	private String ATM_ID;
@@ -25,7 +31,7 @@ public class Atm_Info {
 	private String CONTACT_DETAILS2;
 	private String CONTACT_DETAILS3;
 	private String BRAND_NAME;
-	private Date INSTALLATION_DATE;
+	private String INSTALLATION_DATE;
 	private String IP_ADDRESS;
 	private String ONLINE;
 	private String STATUS;
@@ -249,12 +255,12 @@ public class Atm_Info {
 	}
 
 
-	public Date getINSTALLATION_DATE() {
+	public String getINSTALLATION_DATE() {
 		return INSTALLATION_DATE;
 	}
 
 
-	public void setINSTALLATION_DATE(Date iNSTALLATION_DATE) {
+	public void setINSTALLATION_DATE(String iNSTALLATION_DATE) {
 		INSTALLATION_DATE = iNSTALLATION_DATE;
 	}
 

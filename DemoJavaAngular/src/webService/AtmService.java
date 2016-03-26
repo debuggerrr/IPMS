@@ -26,6 +26,7 @@ import com.google.gson.Gson;
 import dto.Alert;
 import dto.Atm_Info;
 import dto.Country;
+import dto.District;
 import dto.Users;
 
 @Path("/WebService")
@@ -52,7 +53,31 @@ public class AtmService {
 		}
 		return feeds;
 	}
-	
+
+	@GET
+	@Path("/GetDistrict")
+	@Produces("application/json")
+	public String feedDistrict()
+	{
+	String feeds = null;
+	try
+	{
+	ArrayList<District> feedData = null;
+	AlertManager projectManager= new AlertManager();
+	feedData = projectManager.GetDistrict();
+	Gson gson = new Gson();
+	System.out.println(gson.toJson(feedData));
+	feeds = gson.toJson(feedData);
+	}
+
+	catch (Exception e)
+	{
+	System.out.println("Exception Error"); //Console 
+	}
+	return feeds;
+	}
+
+
 	@GET
 	@Path("/GetCountry")
 	@Produces("application/json")

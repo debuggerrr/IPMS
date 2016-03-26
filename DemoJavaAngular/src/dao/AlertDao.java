@@ -18,6 +18,7 @@ import dto.Bank_Info;
 import dto.Atm_Sensor_Relation;
 import dto.Sensor;
 import dto.Country;
+import dto.District;
 
 public class AlertDao {
 
@@ -60,6 +61,29 @@ public class AlertDao {
 
 				feedObject.setCOUNTRY_ID(rs.getInt("country_id"));
 				feedObject.setCOUNTRY_NAME(rs.getString("country_name"));
+
+				System.out.println("Execute");
+				feedData.add(feedObject);
+			}
+			return feedData;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public ArrayList<District> GetDistrict(Connection connection)
+			throws Exception {
+		ArrayList<District> feedData = new ArrayList<District>();
+		try {
+			PreparedStatement ps = connection
+					.prepareStatement("select * from district");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				District feedObject = new District();
+
+				feedObject.setDISTRICT_ID(rs.getInt("DISTRICT_ID"));
+				feedObject.setDISTRICT_NAME(rs.getString("DISTRICT_NAME"));
+				feedObject.setSTATE_ID(rs.getInt("STATE_ID"));
 
 				System.out.println("Execute");
 				feedData.add(feedObject);

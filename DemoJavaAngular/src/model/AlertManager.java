@@ -8,6 +8,7 @@ import dao.Database;
 import dao.AlertDao;
 import dto.Alert;
 import dto.Country;
+import dto.District;
 
 public class AlertManager {
 
@@ -41,5 +42,18 @@ public class AlertManager {
 		return feeds;
 		
 	}
+	public ArrayList<District> GetDistrict()throws Exception {
+		ArrayList<District> feeds = null;
+		try {
+		Database database= new Database();
+		Connection connection = database.Get_Connection();
+		AlertDao project= new AlertDao();
+		feeds=project.GetDistrict(connection);
+		}
+		catch (Exception e) {
+		throw e;
+		}
+		return feeds;
+		}
 	
 }

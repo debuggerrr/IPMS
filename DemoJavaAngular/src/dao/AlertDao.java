@@ -48,6 +48,27 @@ public class AlertDao {
 			throw e;
 		}
 	}
+	public ArrayList<Country> GetCountry(Connection connection)
+			throws Exception {
+		ArrayList<Country> feedData = new ArrayList<Country>();
+		try {
+			PreparedStatement ps = connection
+					.prepareStatement("select * from country");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Country feedObject = new Country();
+
+				feedObject.setCOUNTRY_ID(rs.getInt("country_id"));
+				feedObject.setCOUNTRY_NAME(rs.getString("country_name"));
+
+				System.out.println("Execute");
+				feedData.add(feedObject);
+			}
+			return feedData;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 
 	public List<Object[]> GetAlert(Connection connection) {
 

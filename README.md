@@ -1,2 +1,2 @@
 # IPMS
-GET Code for city,country and district updated !
+GET Code for city,country,state,bank_info ,sensor and district updated !

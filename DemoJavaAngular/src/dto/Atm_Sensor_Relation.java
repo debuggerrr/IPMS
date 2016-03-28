@@ -1,16 +1,15 @@
 package dto;
 
 public class Atm_Sensor_Relation {
-	
+
 	private Integer ID;
 	private String ATM_ID;
 	private Integer SENSOR_ID;
 	private String SENSOR_IMEI;
 	private String SENSOR_STATUS;
-	
-	public Atm_Sensor_Relation()
-	{
-		
+
+	public Atm_Sensor_Relation() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getID() {
@@ -52,7 +51,5 @@ public class Atm_Sensor_Relation {
 	public void setSENSOR_STATUS(String sENSOR_STATUS) {
 		SENSOR_STATUS = sENSOR_STATUS;
 	}
-	
-	
 
 }

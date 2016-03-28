@@ -877,4 +877,112 @@ public class AlertDao {
 		return insertStatus;	
 	}
 
+	public boolean insertAtmSensorRelation(Connection connection, String atmId, int sensorId, String sensorImei,
+			String sensorStatus) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps;
+		boolean insertStatus = false;
+
+		try {
+			ps = connection.prepareStatement("SELECT SENSOR_IMEI FROM ATM_SENSOR_RELATION WHERE SENSOR_IMEI = ?");
+
+			ps.setString(1, sensorImei);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (!rs.next()) {
+
+				ps = connection.prepareStatement(
+						"INSERT INTO ATM_SENSOR_RELATION (ATM_ID,SENSOR_ID ,SENSOR_IMEI,SENSOR_STATUS) VALUES (?,?,?,?)");
+
+				ps.setString(1, atmId);
+				ps.setInt(2, sensorId);
+				ps.setString(3, sensorImei);
+				ps.setString(4, sensorStatus);
+
+				int records = ps.executeUpdate();
+
+				if (records > 0) {
+					insertStatus = true;
+				}
+
+			}
+
+			ps.close();
+
+			connection.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return insertStatus;
+
+	}
+
+	public boolean addTicket(Connection connection, int alertId, String ticketTo, String ticketSubject,
+			String ticketDescription, String ticketStatus, String ticketPriority) {
+		PreparedStatement ps;
+		boolean insertStatus = false;
+		LocalDate localDate = new LocalDate();
+		String created = localDate.toString();
+		System.out.println(created);
+
+		DateTime dateTime = new DateTime();
+
+		String modified = new String(dateTime.toString());
+
+		System.out.println(modified);
+
+		String customFormat = "yyyy-MM-dd HH:mm:ss";
+
+		DateTimeFormatter dtf = ISODateTimeFormat.dateTime();
+		LocalDateTime parsedDate = dtf.parseLocalDateTime(modified);
+
+		String dateWithCustomFormat = parsedDate.toString(DateTimeFormat.forPattern(customFormat));
+		System.out.println(dateWithCustomFormat);
+		// ends here
+
+		try {
+			ps = connection.prepareStatement("SELECT TICKET_ID FROM TICKETS WHERE ALERT_ID = ?");
+
+			ps.setInt(1, alertId);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+
+				ps = connection.prepareStatement(
+						"INSERT INTO TICKETS (ALERT_ID , TICKET_TO , TICKET_SUBJECT , TICKET_DESCRIPTION , TICKET_STATUS , TICKET_PRIORITY , CREATED , MODIFIED) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+
+				ps.setInt(1, alertId);
+				ps.setString(2, ticketTo);
+				ps.setString(3, ticketSubject);
+				ps.setString(4, ticketDescription);
+				ps.setString(5, ticketStatus);
+				ps.setString(6, ticketPriority);
+				ps.setString(7, created);
+				ps.setString(8, dateWithCustomFormat);
+
+				int records = ps.executeUpdate();
+
+				if (records > 0) {
+					insertStatus = true;
+				}
+
+			}
+
+			ps.close();
+
+			connection.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return insertStatus;
+
+	}
+
+	
 }

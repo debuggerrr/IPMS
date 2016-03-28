@@ -24,12 +24,14 @@ import model.AlertManager;
 import com.google.gson.Gson;
 import dto.Alert;
 import dto.Atm_Info;
+import dto.Atm_Sensor_Relation;
 import dto.Bank_Info;
 import dto.City;
 import dto.Country;
 import dto.District;
 import dto.Sensor;
 import dto.State;
+import dto.Tickets;
 import dto.Users;
 
 @Path("/WebService")
@@ -56,141 +58,123 @@ public class AtmService {
 		}
 		return feeds;
 	}
+
 	@GET
 	@Path("/GetBankInfo")
 	@Produces("application/json")
-	public String feedBankInfo()
-	{
-	String bankData = null;
-	try
-	{
-	ArrayList<Bank_Info> bankList = null;
-	AlertManager projectManager= new AlertManager();
-	bankList = projectManager.BankInfoMethod();
-	Gson gson = new Gson();
-	System.out.println(gson.toJson(bankList));
-	bankData = gson.toJson(bankList);
+	public String feedBankInfo() {
+		String bankData = null;
+		try {
+			ArrayList<Bank_Info> bankList = null;
+			AlertManager projectManager = new AlertManager();
+			bankList = projectManager.BankInfoMethod();
+			Gson gson = new Gson();
+			System.out.println(gson.toJson(bankList));
+			bankData = gson.toJson(bankList);
+		}
+
+		catch (Exception e) {
+			System.out.println("Exception Error"); // Console
+		}
+		return bankData;
 	}
 
-	catch (Exception e)
-	{
-	System.out.println("Exception Error"); //Console 
-	}
-	return bankData;
-	}
-	
 	@GET
 	@Path("/GetSensorInfo")
 	@Produces("application/json")
-	public String feedSensorInfo()
-	{
-	String sensorService = null;
-	try
-	{
-	ArrayList<Sensor> sensorList = null;
-	AlertManager projectManager= new AlertManager();
-	sensorList = projectManager.SensorMethod();
-	Gson gson = new Gson();
-	System.out.println(gson.toJson(sensorList));
-	sensorService = gson.toJson(sensorList);
+	public String feedSensorInfo() {
+		String sensorService = null;
+		try {
+			ArrayList<Sensor> sensorList = null;
+			AlertManager projectManager = new AlertManager();
+			sensorList = projectManager.SensorMethod();
+			Gson gson = new Gson();
+			System.out.println(gson.toJson(sensorList));
+			sensorService = gson.toJson(sensorList);
+		}
+
+		catch (Exception e) {
+			System.out.println("Exception Error"); // Console
+		}
+		return sensorService;
 	}
 
-	catch (Exception e)
-	{
-	System.out.println("Exception Error"); //Console 
-	}
-	return sensorService;
-	}
-	
 	@GET
 	@Path("/GetStateInfo")
 	@Produces("application/json")
-	public String state()
-	{
-	String stateService = null;
-	try
-	{
-	ArrayList<State> statedata = null;
-	AlertManager projectManager= new AlertManager();
-	statedata = projectManager.StateMethod();
-	Gson gson = new Gson();
-	System.out.println(gson.toJson(statedata));
-	stateService = gson.toJson(statedata);
+	public String state() {
+		String stateService = null;
+		try {
+			ArrayList<State> statedata = null;
+			AlertManager projectManager = new AlertManager();
+			statedata = projectManager.StateMethod();
+			Gson gson = new Gson();
+			System.out.println(gson.toJson(statedata));
+			stateService = gson.toJson(statedata);
+		}
+
+		catch (Exception e) {
+			System.out.println("Exception Error"); // Console
+		}
+		return stateService;
 	}
 
-	catch (Exception e)
-	{
-	System.out.println("Exception Error"); //Console 
-	}
-	return stateService;
-	}
-
-	
 	@GET
 	@Path("/GetDistrict")
 	@Produces("application/json")
-	public String District()
-	{
-	String districtData = null;
-	try
-	{
-	ArrayList<District> districtList = null;
-	AlertManager projectManager= new AlertManager();
-	districtList = projectManager.DistrictMethod();
-	Gson gson = new Gson();
-	System.out.println(gson.toJson(districtList));
-	districtData = gson.toJson(districtList);
-	}
+	public String District() {
+		String districtData = null;
+		try {
+			ArrayList<District> districtList = null;
+			AlertManager projectManager = new AlertManager();
+			districtList = projectManager.DistrictMethod();
+			Gson gson = new Gson();
+			System.out.println(gson.toJson(districtList));
+			districtData = gson.toJson(districtList);
+		}
 
-	catch (Exception e)
-	{
-	System.out.println("Exception Error"); //Console 
-	}
-	return districtData;
+		catch (Exception e) {
+			System.out.println("Exception Error"); // Console
+		}
+		return districtData;
 	}
 
 	@GET
 	@Path("/GetCityInfo")
 	@Produces("application/json")
-	public String City()
-	{
-	String cityData = null;
-	try
-	{
-	ArrayList<City> cityList = null;
-	AlertManager projectManager= new AlertManager();
-	cityList = projectManager.CityMethod();
-	Gson gson = new Gson();
-	System.out.println(gson.toJson(cityList));
-	cityData = gson.toJson(cityList);
+	public String City() {
+		String cityData = null;
+		try {
+			ArrayList<City> cityList = null;
+			AlertManager projectManager = new AlertManager();
+			cityList = projectManager.CityMethod();
+			Gson gson = new Gson();
+			System.out.println(gson.toJson(cityList));
+			cityData = gson.toJson(cityList);
+		}
+
+		catch (Exception e) {
+			System.out.println("Exception Error"); // Console
+		}
+		return cityData;
 	}
 
-	catch (Exception e)
-	{
-	System.out.println("Exception Error"); //Console 
-	}
-	return cityData;
-	}
 	@GET
 	@Path("/GetCountry")
 	@Produces("application/json")
-	public String feedCountry()
-	{
-	String countryData = null;
-	try
-	{
-	ArrayList<Country> countryList = null;
-	AlertManager projectManager= new AlertManager();
-	countryList = projectManager.CountryMethod();
-	Gson gson = new Gson();
-	System.out.println(gson.toJson(countryList));
-	countryData = gson.toJson(countryList);
-	}
-	catch (Exception e)
-	{
-	System.out.println("Exception Error"); //Console 
-	}
-	return countryData;
+	public String feedCountry() {
+		String countryData = null;
+		try {
+			ArrayList<Country> countryList = null;
+			AlertManager projectManager = new AlertManager();
+			countryList = projectManager.CountryMethod();
+			Gson gson = new Gson();
+			System.out.println(gson.toJson(countryList));
+			countryData = gson.toJson(countryList);
+		} catch (Exception e) {
+			System.out.println("Exception Error"); // Console
+		}
+		return countryData;
 	}
 
 	@GET
@@ -456,11 +440,9 @@ public class AtmService {
 	 * }
 	 */
 
-	
-
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
-	@Produces({MediaType.APPLICATION_JSON})
+	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/addAtm")
 	public Response addAtm(Atm_Info atm) {
 
@@ -551,20 +533,18 @@ public class AtmService {
 
 		String ipAddress = atm.getIP_ADDRESS();
 		System.out.println(ipAddress);
-		
+
 		String online = atm.getONLINE();
 		System.out.println(online);
-		
+
 		String status = atm.getSTATUS();
 		System.out.println(status);
 
 		try {
 
-			
-			  Date date = formatter.parse(d); 
-			  String installationDate = formatter.format(date);
-			  System.out.println(formatter.format(date));
-			  
+			Date date = formatter.parse(d);
+			String installationDate = formatter.format(date);
+			System.out.println(formatter.format(date));
 
 			Database database = new Database();
 			Connection connection = database.Get_Connection();
@@ -574,7 +554,7 @@ public class AtmService {
 					contactPerson1, contactPerson2, contactPerson3, contactEmail1, contactEmail2, contactEmail3,
 					contactNo1, contactNo2, contactNo3, contactDetails1, contactDetails2, contactDetails3, brandName,
 					installationDate, ipAddress, online, status);
-			
+
 			System.out.println("After calling add atm service method!!");
 
 			if (b == true) {
@@ -589,80 +569,63 @@ public class AtmService {
 		}
 		System.out.println(result);
 
-		
 		return Response.status(200).entity("ATM Added into the Database!!").build();
-		/*URL : http://localhost:8080/DemoJavaAngular/REST/WebService/addAtm
-		 {
-    "aTM_ID" : "1111",
-    "aTM_NAME": "Nupur",
-    "aREA_NAME": "Nagpur",
-    "bANK_ID": "3",
-    "cITY_ID": "1",
-    "pINCODE": "440018",
-    "lATITUDE": "12.0",
-    "lONGITUDE": "23.0",
-    "cONTACT_PERSON1": "Aman",
-    "cONTACT_PERSON2": "Aman",
-    "cONTACT_PERSON3": "Aman",
-    "cONTACT_EMAIL1": "RAMU@GMAIL.COM",
-    "cONTACT_EMAIL2": "SHAMU@GMAIL.COM",
-    "cONTACT_EMAIL3": "KALU@GMAIL.COM",
-    "cONTACT_NO1": "9876543219",
-    "cONTACT_NO2": "9876543219",
-    "cONTACT_NO3": "9876543219",
-    "cONTACT_DETAILS1": "GUARD",
-    "cONTACT_DETAILS2": "GUARD",
-    "cONTACT_DETAILS3": "GUARD",
-    "bRAND_NAME": "ABCD",
-    "iNSTALLATION_DATE": "2016-03-20",
-    "iP_ADDRESS": "192.168.78.9",
-    "oNLINE": "1",
-    "sTATUS": "ACTIVATED"
-
-    }*/
-		
+		/*
+		 * URL : http://localhost:8080/DemoJavaAngular/REST/WebService/addAtm {
+		 * "aTM_ID" : "1111", "aTM_NAME": "Nupur", "aREA_NAME": "Nagpur",
+		 * "bANK_ID": "3", "cITY_ID": "1", "pINCODE": "440018", "lATITUDE":
+		 * "12.0", "lONGITUDE": "23.0", "cONTACT_PERSON1": "Aman",
+		 * "cONTACT_PERSON2": "Aman", "cONTACT_PERSON3": "Aman",
+		 * "cONTACT_EMAIL1": "RAMU@GMAIL.COM", "cONTACT_EMAIL2":
+		 * "SHAMU@GMAIL.COM", "cONTACT_EMAIL3": "KALU@GMAIL.COM", "cONTACT_NO1":
+		 * "9876543219", "cONTACT_NO2": "9876543219", "cONTACT_NO3":
+		 * "9876543219", "cONTACT_DETAILS1": "GUARD", "cONTACT_DETAILS2":
+		 * "GUARD", "cONTACT_DETAILS3": "GUARD", "bRAND_NAME": "ABCD",
+		 * "iNSTALLATION_DATE": "2016-03-20", "iP_ADDRESS": "192.168.78.9",
+		 * "oNLINE": "1", "sTATUS": "ACTIVATED"
+		 * 
+		 * }
+		 */
 
 	}
-	
-	
+
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
-	@Produces({MediaType.APPLICATION_JSON})
+	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/addUser")
 	public Response addUser(Users user) {
 
 		String result = "USER Insertion Failed!!!!";
 
 		System.out.println("Inside Try!!");
-		
+
 		String firstName = user.getFIRST_NAME();
 		System.out.println(firstName);
-		
+
 		String lastName = user.getLAST_NAME();
 		System.out.println(lastName);
-		
+
 		String email = user.getEMAIL();
 		System.out.println(email);
-		
+
 		String password = user.getPASSWORD();
 		System.out.println(password);
-		
+
 		String phoneNo = user.getPHONE_NUMBER();
 		System.out.println(phoneNo);
-		
+
 		int roleId = user.getROLE_ID();
 		System.out.println(roleId);
-		
-		//String lastLogin = user.getLAST_LOGIN();
-		//System.out.println(lastLogin);
-		
+
+		// String lastLogin = user.getLAST_LOGIN();
+		// System.out.println(lastLogin);
+
 		String token = user.getTOKEN();
 		System.out.println(token);
-		
+
 		String userStatus = user.getUSER_STATUS();
 		System.out.println(userStatus);
-		
-		
+
 		try {
 
 			Database database = new Database();
@@ -670,7 +633,7 @@ public class AtmService {
 
 			AlertDao n = new AlertDao();
 			boolean b = n.addUser(connection, firstName, lastName, email, password, phoneNo, roleId, token, userStatus);
-					
+
 			System.out.println("After calling add User service method!!");
 
 			if (b == true) {
@@ -685,32 +648,24 @@ public class AtmService {
 		}
 		System.out.println(result);
 
-		
 		return Response.status(200).entity("USER Added into the Database!!").build();
 		/*
-		 URL : http://localhost:8080/DemoJavaAngular/REST/WebService/addUser
-		 {
-    "fIRST_NAME" : "Nupur",
-    "lAST_NAME": "Agrahari",
-    "eMAIL": "nupur.agrahari13@gmail.com",
-    "pASSWORD": "nupur",
-    "pHONE_NUMBER": "8087638410",
-    "rOLE_ID": "1",
-    "tOKEN": "1",
-    "uSER_STATUS": "ACTIVATED"
-    
-    }*/
-		
+		 * URL : http://localhost:8080/DemoJavaAngular/REST/WebService/addUser {
+		 * "fIRST_NAME" : "Nupur", "lAST_NAME": "Agrahari", "eMAIL":
+		 * "nupur.agrahari13@gmail.com", "pASSWORD": "nupur", "pHONE_NUMBER":
+		 * "8087638410", "rOLE_ID": "1", "tOKEN": "1", "uSER_STATUS":
+		 * "ACTIVATED"
+		 * 
+		 * }
+		 */
 
 	}
-	
-	
+
 	@PUT
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Path("/updateCountry/{country_id}")
-	public Response updateCountry(Country country,@PathParam("country_id") int country_Id)
-	{
-		String country_Name=country.getCOUNTRY_NAME();
+	public Response updateCountry(Country country, @PathParam("country_id") int country_Id) {
+		String country_Name = country.getCOUNTRY_NAME();
 		String result = "Employee Insertion Failed!!!!";
 		try {
 
@@ -718,7 +673,7 @@ public class AtmService {
 			Connection connection = database.Get_Connection();
 
 			AlertDao n = new AlertDao();
-			boolean b = n.updateCountry(connection,country_Id,country_Name);
+			boolean b = n.updateCountry(connection, country_Id, country_Name);
 
 			if (b == true) {
 				result = "Country Updated SuccessFully!!!!";
@@ -733,15 +688,14 @@ public class AtmService {
 
 		return Response.status(200).entity(result).build();
 	}
-	
+
 	@PUT
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Path("/updateState/{state_id}")
-	public Response updateCountry(State state,@PathParam("state_id") int state_Id)
-	{
-		String state_Name=state.getSTATE_NAME();
-		int country_Id=state.getCOUNTRY_ID();
-		
+	public Response updateCountry(State state, @PathParam("state_id") int state_Id) {
+		String state_Name = state.getSTATE_NAME();
+		int country_Id = state.getCOUNTRY_ID();
+
 		String result = "State Updation Failed!!!!";
 		try {
 
@@ -749,7 +703,7 @@ public class AtmService {
 			Connection connection = database.Get_Connection();
 
 			AlertDao n = new AlertDao();
-			boolean b = n.updateState(connection,state_Id,state_Name,country_Id);
+			boolean b = n.updateState(connection, state_Id, state_Name, country_Id);
 
 			if (b == true) {
 				result = "State Records Updated SuccessFully!!!!";
@@ -764,15 +718,14 @@ public class AtmService {
 
 		return Response.status(200).entity(result).build();
 	}
-	
+
 	@PUT
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Path("/updateCity/{city_id}")
-	public Response updateCity(City city,@PathParam("city_id") int city_Id)
-	{
-		String city_Name=city.getCITY_NAME();
-		int district_Id=city.getDISTRICT_ID();
-		
+	public Response updateCity(City city, @PathParam("city_id") int city_Id) {
+		String city_Name = city.getCITY_NAME();
+		int district_Id = city.getDISTRICT_ID();
+
 		String result = "City Updation Failed!!!!";
 		try {
 
@@ -780,7 +733,7 @@ public class AtmService {
 			Connection connection = database.Get_Connection();
 
 			AlertDao n = new AlertDao();
-			boolean b = n.updateCity(connection,city_Id,city_Name,district_Id);
+			boolean b = n.updateCity(connection, city_Id, city_Name, district_Id);
 
 			if (b == true) {
 				result = "City Records Updated SuccessFully!!!!";
@@ -794,16 +747,18 @@ public class AtmService {
 		}
 
 		return Response.status(200).entity(result).build();
+		/*
+		 * { "cITY_NAME" : "RAJASHTHAN", "dISTRICT_ID" : "2" }
+		 */
 	}
 
 	@PUT
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Path("/updateDistrict/{district_id}")
-	public Response updateDistrict(District district,@PathParam("district_id") int district_Id)
-	{
-		String district_Name=district.getDISTRICT_NAME();
-		int state_Id=district.getSTATE_ID();
-		
+	public Response updateDistrict(District district, @PathParam("district_id") int district_Id) {
+		String district_Name = district.getDISTRICT_NAME();
+		int state_Id = district.getSTATE_ID();
+
 		String result = "District Updation Failed!!!!";
 		try {
 
@@ -811,7 +766,7 @@ public class AtmService {
 			Connection connection = database.Get_Connection();
 
 			AlertDao n = new AlertDao();
-			boolean b = n.updateDistrict(connection,district_Id,district_Name,state_Id);
+			boolean b = n.updateDistrict(connection, district_Id, district_Name, state_Id);
 
 			if (b == true) {
 				result = "District Records Updated SuccessFully!!!!";
@@ -827,6 +782,106 @@ public class AtmService {
 		return Response.status(200).entity(result).build();
 	}
 
+	@POST
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/addAtmSensorRelation")
+	public Response addAtmSensorRelation(Atm_Sensor_Relation atm) {
 
-	
+		String result = "ATM SENSOR RELATION Insertion Failed!!!!";
+
+		System.out.println("Inside Try!!");
+
+		String atmId = atm.getATM_ID();
+		System.out.println(atmId);
+
+		int sensorId = atm.getSENSOR_ID();
+		System.out.println(sensorId);
+
+		String sensorImei = atm.getSENSOR_IMEI();
+		System.out.println(sensorImei);
+
+		String sensorStatus = atm.getSENSOR_STATUS();
+		System.out.println(sensorStatus);
+
+		try {
+
+			Database database = new Database();
+			Connection connection = database.Get_Connection();
+
+			AlertDao n = new AlertDao();
+			boolean b = n.insertAtmSensorRelation(connection, atmId, sensorId, sensorImei, sensorStatus);
+
+			if (b == true) {
+				result = "Atm Relation Added SuccessFully!!!!";
+
+			} else {
+				result = "Atm Relation Already Exists!!!";
+			}
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		System.out.println(result);
+
+		return Response.status(200).entity(result).build();
+
+	}
+
+	@POST
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/addTicket")
+	public Response addTicket(Tickets ticket) {
+
+		String result = "TICKET Insertion Failed!!!!";
+
+		System.out.println("Inside Try!!");
+
+		int alertId = ticket.getALERT_ID();
+		System.out.println(alertId);
+		
+		int ticket_id=ticket.getTICKET_ID();
+		System.out.println(ticket_id);
+		
+		String ticketTo = ticket.getTICKET_TO();
+		System.out.println(ticketTo);
+
+		String ticketSubject = ticket.getTICKET_SUBJECT();
+		System.out.println(ticketSubject);
+
+		String ticketDescription = ticket.getTICKET_DESCRIPTION();
+		System.out.println(ticketDescription);
+
+		String ticketStatus = ticket.getTICKET_STATUS();
+		System.out.println(ticketStatus);
+
+		String ticketPriority = ticket.getTICKET_PRIORITY();
+		System.out.println(ticketPriority);
+
+		try {
+
+			Database database = new Database();
+			Connection connection = database.Get_Connection();
+
+			AlertDao n = new AlertDao();
+			boolean b = n.addTicket(connection, alertId, ticketTo, ticketSubject, ticketDescription, ticketStatus,
+					ticketPriority);
+
+			if (b == true) {
+				result = "Ticket Added SuccessFully!!!!";
+
+			} else {
+				result = "Ticket Already Exists!!!";
+			}
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		System.out.println(result);
+
+		return Response.status(200).entity(result).build();
+
+	}
+
 }

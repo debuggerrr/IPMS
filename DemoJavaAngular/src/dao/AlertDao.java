@@ -848,7 +848,7 @@ public class AlertDao {
 			System.out.println(e);
 		}
 
-		return insertStatus;	
+		return insertStatus;
 	}
 
 	public boolean updateDistrict(Connection connection, int district_Id, String district_Name, int state_Id) {
@@ -874,7 +874,7 @@ public class AlertDao {
 			System.out.println(e);
 		}
 
-		return insertStatus;	
+		return insertStatus;
 	}
 
 	public boolean insertAtmSensorRelation(Connection connection, String atmId, int sensorId, String sensorImei,
@@ -984,5 +984,140 @@ public class AlertDao {
 
 	}
 
+	public boolean updateSensorInfo(Connection connection, int sensor_id, String sensor_Name, String min_Value,
+			String max_Value, String thres_Value, String status) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps;
+		boolean insertStatus = false;
+
+		try {
+			ps = connection.prepareStatement(
+					"UPDATE SENSOR SET SENSOR_NAME=?,MIN_VALUE=?,MAX_VALUE=?,THRESHOLD_VALUE=?,STATUS=? WHERE SENSOR_ID=?");
+			ps.setString(1, sensor_Name);
+			ps.setString(2, min_Value);
+			ps.setString(3, max_Value);
+			ps.setString(4, thres_Value);
+			ps.setString(5, status);
+			ps.setInt(6, sensor_id);
+
+			int records = ps.executeUpdate();
+			if (records > 0) {
+				insertStatus = true;
+			}
+			ps.close();
+			connection.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return insertStatus;
+	}
+
+	public boolean updateBankInfo(Connection connection, int bank_id, String bank_Name, String bankStatus) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps;
+		boolean insertStatus = false;
+
+		try {
+			ps = connection.prepareStatement("UPDATE BANK_INFO SET BANK_NAME=?,STATUS=? WHERE BANK_ID=?");
+			ps.setString(1, bank_Name);
+			ps.setString(2, bankStatus);
+			ps.setInt(3, bank_id);
+
+			int records = ps.executeUpdate();
+			if (records > 0) {
+				insertStatus = true;
+			}
+			ps.close();
+			connection.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return insertStatus;
+
+	}
+
+	public boolean updateUsersInfo(Connection connection, int userId, String firstName, String lastName, int roleId,
+			String userStatus, String userPhone) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps;
+		boolean insertStatus = false;
+
+		try {
+			ps = connection.prepareStatement(
+					"UPDATE USERS SET FIRST_NAME=?,LAST_NAME=?,PHONE_NUMBER=?,ROLE_ID=?,USER_STATUS=? WHERE USER_ID=?");
+			ps.setString(1, firstName);
+			ps.setString(2, lastName);
+			ps.setString(3, userPhone);
+			ps.setInt(4, roleId);
+			ps.setString(5, userStatus);
+			ps.setInt(6, userId);
+
+			int records = ps.executeUpdate();
+			if (records > 0) {
+				insertStatus = true;
+			}
+			ps.close();
+			connection.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return insertStatus;
+
+	}
+
+	public boolean updateAtmInfo(Connection connection, int atmId, String atmName, int bankId, String areaName,
+			int cityId, String pincode, Double latitude, Double longitude, String contactPerson1, String contactPerson2,
+			String contactPerson3, String contactEmail1, String contactEmail2, String contactEmail3, String contactNo1,
+			String contactNo2, String contactNo3, String contactDetails1, String contactDetails2,
+			String contactDetails3, String brandName, String installDate, String ipAddress, String online,
+			String status,String modifiedDate) {
+		PreparedStatement ps;
+		boolean insertStatus = false;
+
+		try {
+			ps = connection.prepareStatement(
+					"UPDATE ATM_INFO SET ATM_NAME=? , BANK_ID=? , AREA_NAME=? , CITY_ID=? , PINCODE=? , LATITUDE=? , LONGITUDE=? , CONTACT_PERSON1=? , CONTACT_PERSON2=? , CONTACT_PERSON3=? , CONTACT_EMAIL1=? , CONTACT_EMAIL2=? , CONTACT_EMAIL3=? , CONTACT_NO1=? , CONTACT_NO2=? , CONTACT_NO3=? , CONTACT_DETAILS1=? , CONTACT_DETAILS2=? , CONTACT_DETAILS3=? , BRAND_NAME=? , INSTALLATION_DATE=? , IP_ADDRESS=? , ONLINE=? , STATUS=?,MODIFIED=? WHERE ATM_ID=? ");
+
+			ps.setString(1, atmName);
+			ps.setInt(2, bankId);
+			ps.setString(3, areaName);
+			ps.setInt(4, cityId);
+			ps.setString(5, pincode);
+			ps.setDouble(6, latitude);
+			ps.setDouble(7, longitude);
+			ps.setString(8, contactPerson1);
+			ps.setString(9, contactPerson2);
+			ps.setString(10, contactPerson3);
+			ps.setString(11, contactEmail1);
+			ps.setString(12, contactEmail2);
+			ps.setString(13, contactEmail3);
+			ps.setString(14, contactNo1);
+			ps.setString(15, contactNo2);
+			ps.setString(16, contactNo3);
+			ps.setString(17, contactDetails1);
+			ps.setString(18, contactDetails2);
+			ps.setString(19, contactDetails3);
+			ps.setString(20, brandName);
+			ps.setString(21, installDate);
+			ps.setString(22, ipAddress);
+			ps.setString(23, online);
+			ps.setString(24, status);
+			ps.setString(25, modifiedDate);
+			ps.setInt(26, atmId);
+			
+			int records = ps.executeUpdate();
+			if (records > 0) {
+				insertStatus = true;
+			}
+			ps.close();
+			connection.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return insertStatus;
+
+		
 	
+	}
+
 }

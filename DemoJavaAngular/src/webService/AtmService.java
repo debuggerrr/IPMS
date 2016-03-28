@@ -18,7 +18,12 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 
 import model.AlertManager;
 import com.google.gson.Gson;
@@ -840,10 +845,10 @@ public class AtmService {
 
 		int alertId = ticket.getALERT_ID();
 		System.out.println(alertId);
-		
-		int ticket_id=ticket.getTICKET_ID();
+
+		int ticket_id = ticket.getTICKET_ID();
 		System.out.println(ticket_id);
-		
+
 		String ticketTo = ticket.getTICKET_TO();
 		System.out.println(ticketTo);
 
@@ -881,6 +886,205 @@ public class AtmService {
 		System.out.println(result);
 
 		return Response.status(200).entity(result).build();
+
+	}
+
+	@PUT
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Path("/updateSensor/{sensor_id}")
+	public Response updateDistrict(Sensor sensor, @PathParam("sensor_id") int sensor_id) {
+
+		String sensor_Name = sensor.getSENSOR_NAME();
+		String max_Value = sensor.getMAX_VALUE();
+		String min_Value = sensor.getMIN_VALUE();
+		String thres_Value = sensor.getTHRESHOLD_VALUE();
+		String status = sensor.getSTATUS();
+
+		String result = "Sensor Updation Failed!!!!";
+
+		try {
+
+			Database database = new Database();
+			Connection connection = database.Get_Connection();
+
+			AlertDao n = new AlertDao();
+			boolean b = n.updateSensorInfo(connection, sensor_id, sensor_Name, min_Value, max_Value, thres_Value,
+					status);
+
+			if (b == true) {
+				result = "Sensor Records Updated SuccessFully!!!!";
+
+			} else {
+				result = "Sensor Records Update Failed !";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return Response.status(200).entity(result).build();
+		/*
+		 * { "sENSOR_NAME" : "SIDDHESH", "mIN_VALUE" : "100", "mAX_VALUE" :
+		 * "200", "tHRESHOLD_VALUE" : "1000", "sTATUS" : "DEACTIVATED" }
+		 */
+
+	}
+
+	@PUT
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Path("/updateBankInfo/{bank_id}")
+	public Response updateBankInfo(Bank_Info bank, @PathParam("bank_id") int bank_id) {
+
+		String bank_Name = bank.getBANK_NAME();
+		String bankStatus = bank.getSTATUS();
+
+		String result = "Bank Updation Failed!!!!";
+
+		try {
+
+			Database database = new Database();
+			Connection connection = database.Get_Connection();
+
+			AlertDao n = new AlertDao();
+			boolean b = n.updateBankInfo(connection, bank_id, bank_Name, bankStatus);
+
+			if (b == true) {
+				result = "Bank Records Updated SuccessFully!!!!";
+
+			} else {
+				result = "Bank Records Update Failed !";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return Response.status(200).entity(result).build();
+		/*
+		 * { "bANK_NAME" : "SIDDHESH", "sTATUS" : "DEACTIVATED" }
+		 */
+
+	}
+
+	@PUT
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Path("/updateUserInfo/{user_id}")
+	public Response updateUserInfo(Users user, @PathParam("user_id") int userId) {
+
+		String firstName = user.getFIRST_NAME();
+		String lastName = user.getLAST_NAME();
+		int roleId = user.getROLE_ID();
+		String userStatus = user.getUSER_STATUS();
+		String userPhone = user.getPHONE_NUMBER();
+
+		String result = "User Updation Failed!!!!";
+
+		try {
+
+			Database database = new Database();
+			Connection connection = database.Get_Connection();
+
+			AlertDao n = new AlertDao();
+			boolean b = n.updateUsersInfo(connection, userId, firstName, lastName, roleId, userStatus, userPhone);
+
+			if (b == true) {
+				result = "User Records Updated SuccessFully!!!!";
+
+			} else {
+				result = "User Records Update Failed !";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return Response.status(200).entity(result).build();
+		/*
+		 * { "fIRST_NAME" : "SIDDHESH", "lAST_NAME" : "KALGAONKAR",
+		 * "pHONE_NUMBER" : "8655390740", "rOLE_ID" : "2", "uSER_STATUS" :
+		 * "DEACTIVATED" }
+		 */
+
+	}
+
+	@PUT
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Path("/updateAtmInfo/{atm_id}")
+	public Response updateAtmInfo(Atm_Info atm, @PathParam("atm_id") int atmId) {
+
+		String atmName = atm.getATM_NAME();
+		int bankId = atm.getBANK_ID();
+		String areaName = atm.getAREA_NAME();
+		int cityId = atm.getCITY_ID();
+		String pincode = atm.getPINCODE();
+		Double latitude = atm.getLATITUDE();
+		Double longitude = atm.getLONGITUDE();
+		String contactPerson1 = atm.getCONTACT_PERSON1();
+		String contactPerson2 = atm.getCONTACT_PERSON2();
+		String contactPerson3 = atm.getCONTACT_PERSON3();
+		String contactEmail1 = atm.getCONTACT_EMAIL1();
+		String contactEmail2 = atm.getCONTACT_EMAIL2();
+		String contactEmail3 = atm.getCONTACT_EMAIL3();
+		String contactNo1 = atm.getCONTACT_NO1();
+		String contactNo2 = atm.getCONTACT_NO2();
+		String contactNo3 = atm.getCONTACT_NO3();
+		String contactDetails1 = atm.getCONTACT_DETAILS1();
+		String contactDetails2 = atm.getCONTACT_DETAILS2();
+		String contactDetails3 = atm.getCONTACT_DETAILS3();
+		String brandName = atm.getBRAND_NAME();
+		String installDate = atm.getINSTALLATION_DATE();
+		String ipAddress = atm.getIP_ADDRESS();
+		String online = atm.getONLINE();
+		String status = atm.getSTATUS();
+		DateTime dateTime = new DateTime();
+
+		String modified = new String(dateTime.toString());
+
+		System.out.println(modified);
+
+		String customFormat = "yyyy-MM-dd HH:mm:ss";
+
+		DateTimeFormatter dtf = ISODateTimeFormat.dateTime();
+		LocalDateTime parsedDate = dtf.parseLocalDateTime(modified);
+
+		String modifiedDate = parsedDate.toString(DateTimeFormat.forPattern(customFormat));
+		String result = "Atm Updation Failed!!!!";
+
+		try {
+
+			Database database = new Database();
+			Connection connection = database.Get_Connection();
+
+			AlertDao n = new AlertDao();
+			boolean b = n.updateAtmInfo(connection, atmId, atmName, bankId, areaName, cityId, pincode, latitude,
+					longitude, contactPerson1, contactPerson2, contactPerson3, contactEmail1, contactEmail2,
+					contactEmail3, contactNo1, contactNo2, contactNo3, contactDetails1, contactDetails2,
+					contactDetails3, brandName, installDate, ipAddress, online, status, modifiedDate);
+
+			if (b == true) {
+				result = "Atm Records Updated SuccessFully!!!!";
+
+			} else {
+				result = "Atm Records Update Failed !";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return Response.status(200).entity(result).build();
+		/*
+		 * { "aTM_NAME": "SIDDHESH", "aREA_NAME": "BHIWANDI", "bANK_ID": "3",
+		 * "cITY_ID": "1", "pINCODE": "440018", "lATITUDE": "12.0", "lONGITUDE":
+		 * "23.0", "cONTACT_PERSON1": "Aman", "cONTACT_PERSON2": "Aman",
+		 * "cONTACT_PERSON3": "Aman", "cONTACT_EMAIL1": "RAMU@GMAIL.COM",
+		 * "cONTACT_EMAIL2": "SHAMU@GMAIL.COM", "cONTACT_EMAIL3":
+		 * "KALU@GMAIL.COM", "cONTACT_NO1": "9876543219", "cONTACT_NO2":
+		 * "9876543219", "cONTACT_NO3": "9876543219", "cONTACT_DETAILS1":
+		 * "GUARD", "cONTACT_DETAILS2": "GUARD", "cONTACT_DETAILS3": "GUARD",
+		 * "bRAND_NAME": "ABCD", "iNSTALLATION_DATE": "2016-03-20",
+		 * "iP_ADDRESS": "192.168.78.9", "oNLINE": "1", "sTATUS": "ACTIVATED" }
+		 */
 
 	}
 

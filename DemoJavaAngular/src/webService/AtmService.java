@@ -1088,4 +1088,142 @@ public class AtmService {
 
 	}
 
+	@PUT
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Path("/deleteSensorInfo/{sensor_id}")
+	public Response deleteSensorInfo(Sensor sensor, @PathParam("sensor_id") int sensor_id) {
+
+		String status = sensor.getSTATUS();
+		String result = "Sensor Updation Failed!!!!";
+
+		try {
+
+			Database database = new Database();
+			Connection connection = database.Get_Connection();
+
+			AlertDao n = new AlertDao();
+			boolean b = n.deleteSensorInfo(connection, sensor_id, status);
+
+			if (b == true) {
+				result = "Sensor Records Updated SuccessFully!!!!";
+
+			} else {
+				result = "Sensor Records Update Failed !";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return Response.status(200).entity(result).build();
+		/*
+		 * { "sTATUS": "3" }
+		 */
+	}
+
+
+	@PUT
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Path("/deleteBankInfo/{bank_id}")
+	public Response deleteBankInfo(Bank_Info bank, @PathParam("bank_id") int bank_id) {
+
+		String status = bank.getSTATUS();
+		String result = "Bank Updation Failed!!!!";
+
+		try {
+
+			Database database = new Database();
+			Connection connection = database.Get_Connection();
+
+			AlertDao n = new AlertDao();
+			boolean b = n.deleteBankInfo(connection, bank_id, status);
+
+			if (b == true) {
+				result = "Bank Records Updated SuccessFully!!!!";
+
+			} else {
+				result = "Bank Records Update Failed !";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return Response.status(200).entity(result).build();
+		/*
+		 * { "sTATUS": "3" }
+		 */
+	}
+
+	
+	@PUT
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Path("/deleteAtmInfo/{atm_id}")
+	public Response deleteAtmInfo(Atm_Info atm, @PathParam("atm_id") int atm_id) {
+
+		String status = atm.getSTATUS();
+		String result = "ATM Updation Failed!!!!";
+
+		try {
+
+			Database database = new Database();
+			Connection connection = database.Get_Connection();
+
+			AlertDao n = new AlertDao();
+			boolean b = n.deleteAtmInfo(connection, atm_id, status);
+
+			if (b == true) {
+				result = "ATM Records Updated SuccessFully!!!!";
+
+			} else {
+				result = "ATM Records Update Failed !";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return Response.status(200).entity(result).build();
+		/*
+		 * { "sTATUS": "3" }
+		 */
+	}
+
+	
+
+	@PUT
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Path("/deleteUserInfo/{user_id}")
+	public Response deleteUsersInfo(Users user, @PathParam("user_id") int user_id) {
+
+		String status = user.getUSER_STATUS();
+		String result = "ATM Updation Failed!!!!";
+
+		try {
+
+			Database database = new Database();
+			Connection connection = database.Get_Connection();
+
+			AlertDao n = new AlertDao();
+			boolean b = n.deleteUserInfo(connection, user_id, status);
+
+			if (b == true) {
+				result = "User Records Updated SuccessFully!!!!";
+
+			} else {
+				result = "User Records Update Failed !";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return Response.status(200).entity(result).build();
+		/*
+		 * { "sTATUS": "3" }
+		 */
+	}
+
+
+
 }

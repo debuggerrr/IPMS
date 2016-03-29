@@ -1120,4 +1120,98 @@ public class AlertDao {
 	
 	}
 
+	public boolean deleteSensorInfo(Connection connection, int sensor_id, String status) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps;
+		boolean insertStatus = false;
+
+		try {
+			ps = connection.prepareStatement(
+					"UPDATE SENSOR SET STATUS=? WHERE SENSOR_ID=?");
+			ps.setString(1,status);
+			ps.setInt(2,sensor_id);
+			int records = ps.executeUpdate();
+			if (records > 0) {
+				insertStatus = true;
+			}
+			ps.close();
+			connection.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return insertStatus;
+
+	}
+
+	public boolean deleteBankInfo(Connection connection, int bank_id, String status) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps;
+		boolean insertStatus = false;
+
+		try {
+			ps = connection.prepareStatement(
+					"UPDATE BANK_INFO SET STATUS=? WHERE BANK_ID=?");
+			ps.setString(1,status);
+			ps.setInt(2,bank_id);
+			int records = ps.executeUpdate();
+			if (records > 0) {
+				insertStatus = true;
+			}
+			ps.close();
+			connection.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return insertStatus;
+
+	}
+
+
+	public boolean deleteAtmInfo(Connection connection, int atm_id, String status) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps;
+		boolean insertStatus = false;
+
+		try {
+			ps = connection.prepareStatement(
+					"UPDATE ATM_INFO SET STATUS=? WHERE ATM_ID=?");
+			ps.setString(1,status);
+			ps.setInt(2,atm_id);
+			int records = ps.executeUpdate();
+			if (records > 0) {
+				insertStatus = true;
+			}
+			ps.close();
+			connection.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return insertStatus;
+
+	}
+
+	public boolean deleteUserInfo(Connection connection, int user_id, String status) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps;
+		boolean insertStatus = false;
+
+		try {
+			ps = connection.prepareStatement(
+					"UPDATE USERS SET USER_STATUS=? WHERE USER_ID=?");
+			ps.setString(1,status);
+			ps.setInt(2,user_id);
+			int records = ps.executeUpdate();
+			if (records > 0) {
+				insertStatus = true;
+			}
+			ps.close();
+			connection.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return insertStatus;
+
+	}
+
+
 }

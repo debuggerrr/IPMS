@@ -1070,7 +1070,7 @@ public class AlertDao {
 			String contactPerson3, String contactEmail1, String contactEmail2, String contactEmail3, String contactNo1,
 			String contactNo2, String contactNo3, String contactDetails1, String contactDetails2,
 			String contactDetails3, String brandName, String installDate, String ipAddress, String online,
-			String status,String modifiedDate) {
+			String status, String modifiedDate) {
 		PreparedStatement ps;
 		boolean insertStatus = false;
 
@@ -1104,7 +1104,7 @@ public class AlertDao {
 			ps.setString(24, status);
 			ps.setString(25, modifiedDate);
 			ps.setInt(26, atmId);
-			
+
 			int records = ps.executeUpdate();
 			if (records > 0) {
 				insertStatus = true;
@@ -1116,8 +1116,6 @@ public class AlertDao {
 		}
 		return insertStatus;
 
-		
-	
 	}
 
 	public boolean deleteSensorInfo(Connection connection, int sensor_id, String status) {
@@ -1126,10 +1124,9 @@ public class AlertDao {
 		boolean insertStatus = false;
 
 		try {
-			ps = connection.prepareStatement(
-					"UPDATE SENSOR SET STATUS=? WHERE SENSOR_ID=?");
-			ps.setString(1,status);
-			ps.setInt(2,sensor_id);
+			ps = connection.prepareStatement("UPDATE SENSOR SET STATUS=? WHERE SENSOR_ID=?");
+			ps.setString(1, status);
+			ps.setInt(2, sensor_id);
 			int records = ps.executeUpdate();
 			if (records > 0) {
 				insertStatus = true;
@@ -1149,10 +1146,9 @@ public class AlertDao {
 		boolean insertStatus = false;
 
 		try {
-			ps = connection.prepareStatement(
-					"UPDATE BANK_INFO SET STATUS=? WHERE BANK_ID=?");
-			ps.setString(1,status);
-			ps.setInt(2,bank_id);
+			ps = connection.prepareStatement("UPDATE BANK_INFO SET STATUS=? WHERE BANK_ID=?");
+			ps.setString(1, status);
+			ps.setInt(2, bank_id);
 			int records = ps.executeUpdate();
 			if (records > 0) {
 				insertStatus = true;
@@ -1166,17 +1162,15 @@ public class AlertDao {
 
 	}
 
-
 	public boolean deleteAtmInfo(Connection connection, int atm_id, String status) {
 		// TODO Auto-generated method stub
 		PreparedStatement ps;
 		boolean insertStatus = false;
 
 		try {
-			ps = connection.prepareStatement(
-					"UPDATE ATM_INFO SET STATUS=? WHERE ATM_ID=?");
-			ps.setString(1,status);
-			ps.setInt(2,atm_id);
+			ps = connection.prepareStatement("UPDATE ATM_INFO SET STATUS=? WHERE ATM_ID=?");
+			ps.setString(1, status);
+			ps.setInt(2, atm_id);
 			int records = ps.executeUpdate();
 			if (records > 0) {
 				insertStatus = true;
@@ -1196,10 +1190,9 @@ public class AlertDao {
 		boolean insertStatus = false;
 
 		try {
-			ps = connection.prepareStatement(
-					"UPDATE USERS SET USER_STATUS=? WHERE USER_ID=?");
-			ps.setString(1,status);
-			ps.setInt(2,user_id);
+			ps = connection.prepareStatement("UPDATE USERS SET USER_STATUS=? WHERE USER_ID=?");
+			ps.setString(1, status);
+			ps.setInt(2, user_id);
 			int records = ps.executeUpdate();
 			if (records > 0) {
 				insertStatus = true;
@@ -1213,5 +1206,63 @@ public class AlertDao {
 
 	}
 
+	public boolean addAlert(Connection connection, String alertName, String alertType, String imeiNo, String atmId,
+			String ticketNumber, String ticketStatus,String attendedBy) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps;
+		boolean insertStatus = false;
+		LocalDate localDate = new LocalDate();
+		String created = localDate.toString();
+		System.out.println(created);
+
+		DateTime dateTime = new DateTime();
+
+		String modified = new String(dateTime.toString());
+
+		System.out.println(modified);
+
+		String customFormat = "yyyy-MM-dd HH:mm:ss";
+
+		DateTimeFormatter dtf = ISODateTimeFormat.dateTime();
+		LocalDateTime parsedDate = dtf.parseLocalDateTime(modified);
+
+		String dateWithCustomFormat = parsedDate.toString(DateTimeFormat.forPattern(customFormat));
+		System.out.println(dateWithCustomFormat);
+		// ends here
+
+		try {
+
+			ps = connection.prepareStatement(
+					"INSERT INTO ALERT (ALERT_NAME ,ALERT_TYPE,ALERT_DATE,ALERT_DATETIME,IMEI_NO,ATM_ID,TICKET_NUMBER,TICKET_STATUS,ALERT_ATTENDED_BY,ATTEND_TIME) SELECT "
++"CONCAT(?),CONCAT(?),CONCAT(?),CONCAT(?),CONCAT(?),CONCAT(?),CONCAT(?),CONCAT(?),CONCAT(?),CONCAT(?) FROM `information_schema`.`SESSION_VARIABLES` LIMIT 3000");
+
+			ps.setString(1,alertName);
+			ps.setString(2, alertType);
+			ps.setString(3,created);
+			ps.setString(4, dateWithCustomFormat);
+			ps.setString(5, imeiNo);
+			ps.setString(6, atmId);
+			ps.setString(7, ticketNumber);
+			ps.setString(8, ticketStatus);
+			ps.setString(9, attendedBy);
+			ps.setString(10,dateWithCustomFormat);
+			
+			int records = ps.executeUpdate();
+
+			if (records > 0) {
+				insertStatus = true;
+			}
+
+			ps.close();
+
+			connection.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return insertStatus;
+
+	}
 
 }

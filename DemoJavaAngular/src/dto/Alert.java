@@ -18,9 +18,8 @@ public class Alert {
 	private Timestamp ATTEND_TIME;
 
 	public Alert() {
-
+		// TODO Auto-generated constructor stub
 	}
-
 	public Integer getALERT_ID() {
 		return ALERT_ID;
 	}

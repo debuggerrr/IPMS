@@ -666,6 +666,49 @@ public class AtmService {
 
 	}
 
+	@POST
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/addAlert")
+	public Response addAlert(Alert alert) {
+
+		String result = "Alert Insertion Failed!!!!";
+		String alertName = alert.getALERT_NAME();
+		String alertType = alert.getALERT_TYPE();
+		String imeiNo = alert.getIMEI_NO();
+		String atmId = alert.getATM_ID();
+		String ticketNumber = alert.getTICKET_NUMBER();
+		String ticketStatus = alert.getTICKET_STATUS();
+		String attendedBy = alert.getALERT_ATTENDED_BY();
+		try {
+
+			Database database = new Database();
+			Connection connection = database.Get_Connection();
+
+			AlertDao n = new AlertDao();
+			boolean b = n.addAlert(connection, alertName, alertType, imeiNo, atmId, ticketNumber, ticketStatus,
+					attendedBy);
+
+			if (b == true) {
+				result = "Alert Added SuccessFully!!!!";
+
+			} else {
+				result = "Alert Insert Failed !!!";
+			}
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		System.out.println(result);
+
+		return Response.status(200).entity(result).build();
+		/*
+		 * { "aLERT_NAME" : "VIBRATION ALERT", "aLERT_TYPE" : "CRITICAL",
+		 * "iMEI_NO" : "202", "aTM_ID" : "1102", "tICKET_NUMBER" : "12898",
+		 * "tICKET_STATUS" : "ACTIVE", "aLERT_ATTENDED_BY" : "SIDDHESH" }
+		 */
+	}
+
 	@PUT
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Path("/updateCountry/{country_id}")
@@ -1121,7 +1164,6 @@ public class AtmService {
 		 */
 	}
 
-
 	@PUT
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Path("/deleteBankInfo/{bank_id}")
@@ -1155,7 +1197,6 @@ public class AtmService {
 		 */
 	}
 
-	
 	@PUT
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Path("/deleteAtmInfo/{atm_id}")
@@ -1189,8 +1230,6 @@ public class AtmService {
 		 */
 	}
 
-	
-
 	@PUT
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Path("/deleteUserInfo/{user_id}")
@@ -1223,7 +1262,5 @@ public class AtmService {
 		 * { "sTATUS": "3" }
 		 */
 	}
-
-
 
 }
